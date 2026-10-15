@@ -1,5 +1,6 @@
 // LIBRARIES ---------------------------------------------------------------------------------------------------------------------------------------|
 import { StrictMode } from "react"
+import { BrowserRouter } from "react-router"
 import { createRoot } from "react-dom/client"
 
 // STYLES ------------------------------------------------------------------------------------------------------------------------------------------|
@@ -13,6 +14,8 @@ const root = createRoot(document.getElementById("root"))
 
 root.render(
     <StrictMode>
-        <App />
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
     </StrictMode>
 )
