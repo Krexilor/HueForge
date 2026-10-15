@@ -1,0 +1,152 @@
+/* TOKENS ---------------------------------------------------------------------------------------------------------------------------------------- */
+:root {
+    /* Colors */
+    --bg: #f5f4f1;
+    --surface: #ffffff;
+    --fg: #1b1a19;
+    --muted: #6d6963;
+    --line: #e5e2dc;
+    --accent: #2f6fed;
+    --accent-fg: #ffffff;
+    --soft: #eef2fc;
+
+    /* Typography */
+    --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+    /* Spacing */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+
+    /* Shape and depth */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 999px;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+    /* Motion */
+    --ease: 0.18s ease;
+
+    /* Layout */
+    --sidebar-width: 264px;
+    --sidebar-rail: 76px;
+    --content-width: 980px;
+
+    color-scheme: light;
+}
+
+/* DARK THEME ------------------------------------------------------------------------------------------------------------------------------------ */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #131312;
+        --surface: #1c1b1a;
+        --fg: #f1efec;
+        --muted: #a39e97;
+        --line: #2f2d2b;
+        --soft: #23262e;
+        --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+        color-scheme: dark;
+    }
+}
+
+:root[data-theme="dark"] {
+    --bg: #131312;
+    --surface: #1c1b1a;
+    --fg: #f1efec;
+    --muted: #a39e97;
+    --line: #2f2d2b;
+    --soft: #23262e;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+    color-scheme: dark;
+}
+
+/* RESET ----------------------------------------------------------------------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+img, svg, video, canvas {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul, ol {
+    padding: 0;
+    list-style: none;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+}
+
+/* BASE ------------------------------------------------------------------------------------------------------------------------------------------ */
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+}
+
+code, pre, textarea.mono {
+    font-family: var(--font-mono);
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--accent-fg);
+}
+
+/* ACCESSIBILITY --------------------------------------------------------------------------------------------------------------------------------- */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
