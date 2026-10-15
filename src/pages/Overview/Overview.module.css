@@ -1,0 +1,205 @@
+/* PAGE ------------------------------------------------------------------------------------------------------------------------------------------ */
+.overview {
+    display: grid;
+    gap: var(--space-5);
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-5);
+}
+
+/* HERO ------------------------------------------------------------------------------------------------------------------------------------------ */
+.hero {
+    padding: var(--space-6);
+    background: linear-gradient(135deg, var(--soft), var(--surface));
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+}
+
+.title {
+    max-width: 16em;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+}
+
+.text {
+    max-width: 38em;
+    margin: var(--space-4) 0 var(--space-5);
+    color: var(--muted);
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.primary,
+.secondary {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 var(--space-4);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+}
+
+.primary {
+    background: var(--accent);
+    color: var(--accent-fg);
+}
+
+.secondary {
+    background: var(--surface);
+    border: 1px solid var(--line);
+}
+
+.strip {
+    display: flex;
+    height: 44px;
+    margin-top: var(--space-5);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.strip span {
+    flex: 1;
+}
+
+/* TOOLS ----------------------------------------------------------------------------------------------------------------------------------------- */
+.tools {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-4);
+}
+
+.tool {
+    display: grid;
+    gap: var(--space-3);
+    align-content: start;
+    padding: var(--space-5);
+    min-height: 165px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    transition: border-color var(--ease), transform var(--ease);
+}
+
+.tool:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.name {
+    font-size: 16px;
+}
+
+.description {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* ABOUT ----------------------------------------------------------------------------------------------------------------------------------------- */
+.about {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+
+.card {
+    display: grid;
+    gap: var(--space-3);
+    align-content: start;
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+}
+
+.heading {
+    font-size: 20px;
+}
+
+.person {
+    font-weight: 600;
+}
+
+.person span {
+    font-weight: 400;
+    color: var(--muted);
+}
+
+.stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.tag {
+    padding: 4px 12px;
+    background: var(--soft);
+    color: var(--accent);
+    border-radius: var(--radius-full);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.linkIcon {
+    width: 14px;
+    height: 14px;
+}
+
+/* RESPONSIVENESS -------------------------------------------------------------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .tools {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 699px) {
+    .overview {
+        padding: var(--space-4);
+    }
+
+    .hero {
+        padding: var(--space-5);
+    }
+
+    .tools {
+        grid-template-columns: 1fr;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+}
