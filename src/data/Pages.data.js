@@ -9,7 +9,5 @@ export const pages = [
     { path: "/harmony", label: "Harmony", icon: Blend, description: "Analogous, triad, split and more on a color wheel." },
     { path: "/contrast-checker", label: "Contrast Checker", icon: Contrast, description: "WCAG pass or fail for every text and background pair." },
     { path: "/dark-mode", label: "Dark Mode", icon: Moon, description: "Light and dark tokens tuned side by side." },
-    { path: "/color-vision", label: "Color Vision", icon: Eye, description: "See your palette through four types of color blindness." },
-    { path: "/live-preview", label: "Live Preview", icon: PanelsTopLeft, description: "Buttons, forms and alerts styled by your system." },
-    { path: "/export", label: "Export", icon: Download, description: "CSS variables, Tailwind theme, or design tokens JSON." }
+    { path: "/color-vision", label: "Color Vision", icon: Eye, description: "See your palette through four types of color blindness." }
 ]
