@@ -4,6 +4,7 @@ import { Link } from "react-router"
 import { ArrowRight, Check, Copy, Pipette, Shuffle } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
+import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
 import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
 
 // HELPERS -----------------------------------------------------------------------------------------------------------------------------------------|
@@ -65,9 +66,13 @@ export default function ColorPicker() {
 
     return (
         <div className = {styles.page}>
-            <header>
-                <h1 className = {styles.title}>Color Picker</h1>
-                <p className = {styles.subtitle}>Pick a base color, then copy it in any format. Paste hex, rgb, hsl, oklch or a color name.</p>
+            <header className = {styles.header}>
+                <div>
+                    <h1 className = {styles.title}>Color Picker</h1>
+                    <p className = {styles.subtitle}>Pick a base color, then copy it in any format. Paste hex, rgb, hsl, oklch or a color name.</p>
+                </div>
+
+                <ShareButton hex = {hex} title = "HueForge Color Picker" />
             </header>
 
             <div className = {styles.grid}>

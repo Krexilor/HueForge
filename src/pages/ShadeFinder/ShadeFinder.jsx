@@ -4,15 +4,16 @@ import { useMemo, useState } from "react"
 import { Check, Copy, Pipette, RotateCcw } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
-import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
+import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
 import ExportPanel from "../../components/common/ExportPanel/ExportPanel.jsx"
+import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
 
 // HELPERS -----------------------------------------------------------------------------------------------------------------------------------------|
 import { parseColor, toHex, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
 import { STEPS, DEFAULT_OPTIONS, buildScale, buildNeutral, findPassing } from "../../lib/Color/Scale.js"
 import { colorLink } from "../../lib/Color/Links.js"
 import { slug } from "../../lib/Export/Tokens.js"
-import useSharedColor, { DEFAULT_HEX } from "../../hooks/useSharedColor.js"
+import useSharedColor from "../../hooks/useSharedColor.js"
 import useSessionState from "../../hooks/useSessionState.js"
 import useCopy from "../../hooks/useCopy.js"
 
@@ -90,17 +91,19 @@ export default function ShadeFinder() {
     }
 
     function reset() {
-        setHex(DEFAULT_HEX)
         setOptions(DEFAULT_OPTIONS)
         setName("primary")
-        setDraft(null)
     }
 
     return (
         <div className = {styles.page}>
-            <header>
-                <h1 className = {styles.title}>Shade Finder</h1>
-                <p className = {styles.subtitle}>Turn one color into a 50 to 950 scale with even lightness steps and contrast checks on every shade.</p>
+            <header className = {styles.header}>
+                <div>
+                    <h1 className = {styles.title}>Shade Finder</h1>
+                    <p className = {styles.subtitle}>Turn one color into a 50 to 950 scale with even lightness steps and contrast checks on every shade.</p>
+                </div>
+
+                <ShareButton hex = {hex} title = "HueForge Shade Finder" />
             </header>
 
             <section className = {styles.card}>
@@ -167,7 +170,7 @@ export default function ShadeFinder() {
 
                         <button className = {styles.button} onClick = {reset}>
                             <RotateCcw className = {styles.buttonIcon} aria-hidden = "true" />
-                            Reset
+                            Reset settings
                         </button>
                     </div>
                 </div>
