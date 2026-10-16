@@ -1,20 +1,21 @@
 // LIBRARIES ---------------------------------------------------------------------------------------------------------------------------------------|
 import { useState } from "react"
-import { Check, Copy, Pipette, Shuffle } from "lucide-react"
+import { Link } from "react-router"
+import { ArrowRight, Check, Copy, Pipette, Shuffle } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
 import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
 
 // HELPERS -----------------------------------------------------------------------------------------------------------------------------------------|
-import { parseColor, toHex, toLch, isInGamut, randomColor, getFormats, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
+import { parseColor, isInGamut, randomColor, getFormats, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
+import { colorLink } from "../../lib/Color/Links.js"
+import useSharedColor from "../../hooks/useSharedColor.js"
 import useCopy from "../../hooks/useCopy.js"
 
 // STYLES ------------------------------------------------------------------------------------------------------------------------------------------|
 import styles from "./ColorPicker.module.css"
 
 // CONSTANTS ---------------------------------------------------------------------------------------------------------------------------------------|
-const DEFAULT_HEX = "#2f6fed"
-
 const SLIDERS = [
     { id: "l", label: "Lightness", max: 1, step: 0.001, format: value => `${(value * 100).toFixed(1)}%` },
     { id: "c", label: "Chroma", max: 0.4, step: 0.001, format: value => value.toFixed(3) },
@@ -26,13 +27,12 @@ const CONTRAST_TARGETS = [
     { label: "Black text", value: "#000000" },
 ]
 
-// COLOR PICKER ------------------------------------------------------------------------------------------------------------------------------------|
+// COLOR PICKER -------------------------------------------------------------------------------------------------------------------------------------|
 export default function ColorPicker() {
-    const [lch, setLch] = useState(() => toLch(DEFAULT_HEX))
+    const { lch, setLch, hex } = useSharedColor()
     const [draft, setDraft] = useState(null)
     const { copied, copy } = useCopy()
 
-    const hex = toHex(lch)
     const readable = getReadable(hex)
     const formats = getFormats(hex)
     const inGamut = isInGamut(lch)
@@ -105,6 +105,11 @@ export default function ColorPicker() {
                             <Shuffle className = {styles.buttonIcon} aria-hidden = "true" />
                             Random
                         </button>
+
+                        <Link className = {`${styles.button} ${styles.solid}`} to = {colorLink("/shade-finder", hex)}>
+                            Generate shades
+                            <ArrowRight className = {styles.buttonIcon} aria-hidden = "true" />
+                        </Link>
                     </div>
                 </section>
 

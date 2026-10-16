@@ -1,6 +1,7 @@
 // LIBRARIES ---------------------------------------------------------------------------------------------------------------------------------------|
+import { Link } from "react-router"
 import { useMemo, useState } from "react"
-import { Check, Copy, RotateCcw } from "lucide-react"
+import { Check, Copy, Pipette, RotateCcw } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
 import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
@@ -9,14 +10,16 @@ import ExportPanel from "../../components/common/ExportPanel/ExportPanel.jsx"
 // HELPERS -----------------------------------------------------------------------------------------------------------------------------------------|
 import { parseColor, toHex, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
 import { STEPS, DEFAULT_OPTIONS, buildScale, buildNeutral, findPassing } from "../../lib/Color/Scale.js"
+import { colorLink } from "../../lib/Color/Links.js"
 import { slug } from "../../lib/Export/Tokens.js"
+import useSharedColor, { DEFAULT_HEX } from "../../hooks/useSharedColor.js"
+import useSessionState from "../../hooks/useSessionState.js"
 import useCopy from "../../hooks/useCopy.js"
 
 // STYLES ------------------------------------------------------------------------------------------------------------------------------------------|
 import styles from "./ShadeFinder.module.css"
 
 // CONSTANTS ---------------------------------------------------------------------------------------------------------------------------------------|
-const DEFAULT_HEX = "#2f6fed"
 const TARGETS = [3, 4.5, 7]
 
 const BACKGROUNDS = [
@@ -46,13 +49,13 @@ function Ratio({ hex, background, label }) {
 
 // SHADE FINDER ------------------------------------------------------------------------------------------------------------------------------------|
 export default function ShadeFinder() {
-    const [hex, setHex] = useState(DEFAULT_HEX)
+    const { hex, setHex } = useSharedColor()
     const [draft, setDraft] = useState(null)
-    const [name, setName] = useState("primary")
-    const [options, setOptions] = useState(DEFAULT_OPTIONS)
-    const [selected, setSelected] = useState(5)
-    const [target, setTarget] = useState(4.5)
-    const [background, setBackground] = useState("#ffffff")
+    const [name, setName] = useSessionState("shade:name", "primary")
+    const [options, setOptions] = useSessionState("shade:options", DEFAULT_OPTIONS)
+    const [selected, setSelected] = useSessionState("shade:selected", 5)
+    const [target, setTarget] = useSessionState("shade:target", 4.5)
+    const [background, setBackground] = useSessionState("shade:background", "#ffffff")
     const { copied, copy } = useCopy()
 
     const scale = useMemo(() => buildScale(hex, options), [hex, options])
@@ -156,10 +159,17 @@ export default function ShadeFinder() {
                         Include tinted neutral scale in export
                     </label>
 
-                    <button className = {styles.button} onClick = {reset}>
-                        <RotateCcw className = {styles.buttonIcon} aria-hidden = "true" />
-                        Reset
-                    </button>
+                    <div className = {styles.actions}>
+                        <Link className = {styles.button} to = {colorLink("/color-picker", hex)}>
+                            <Pipette className = {styles.buttonIcon} aria-hidden = "true" />
+                            Edit in Color Picker
+                        </Link>
+
+                        <button className = {styles.button} onClick = {reset}>
+                            <RotateCcw className = {styles.buttonIcon} aria-hidden = "true" />
+                            Reset
+                        </button>
+                    </div>
                 </div>
             </section>
 

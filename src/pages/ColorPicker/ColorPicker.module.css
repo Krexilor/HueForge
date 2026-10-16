@@ -80,19 +80,20 @@
 
 .actions {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
+    gap: var(--space-2);
 }
 
 .button {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2);
-    min-height: 40px;
-    padding: 0 14px;
+    gap: 6px;
+    min-height: 36px;
+    padding: 0 10px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
+    font-size: 13px;
+    white-space: nowrap;
     transition: border-color var(--ease);
 }
 
@@ -100,9 +101,15 @@
     border-color: var(--accent);
 }
 
+.solid {
+    background: var(--accent);
+    border-color: transparent;
+    color: var(--accent-fg);
+}
+
 .buttonIcon {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
 }
 
 /* SLIDERS --------------------------------------------------------------------------------------------------------------------------------------- */
@@ -237,5 +244,11 @@
 
     .card {
         padding: var(--space-4);
+    }
+}
+
+@media (max-width: 479px) {
+    .actions {
+        flex-wrap: wrap;
     }
 }
