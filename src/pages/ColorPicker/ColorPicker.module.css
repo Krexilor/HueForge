@@ -1,0 +1,241 @@
+/* PAGE ------------------------------------------------------------------------------------------------------------------------------------------ */
+.page {
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-5);
+}
+
+.title {
+    font-size: 28px;
+}
+
+.subtitle {
+    margin-top: var(--space-1);
+    color: var(--muted);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+}
+
+.card {
+    display: grid;
+    gap: var(--space-4);
+    align-content: start;
+    padding: var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+}
+
+.heading {
+    font-size: 18px;
+}
+
+/* PREVIEW --------------------------------------------------------------------------------------------------------------------------------------- */
+.preview {
+    display: flex;
+    align-items: flex-end;
+    height: 180px;
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    transition: background var(--ease);
+}
+
+.previewHex {
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 600;
+}
+
+/* CONTROLS -------------------------------------------------------------------------------------------------------------------------------------- */
+.inputs {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.text {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    padding: 0 var(--space-3);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+}
+
+.invalid {
+    border-color: #c8372d;
+}
+
+.error {
+    font-size: 13px;
+    color: #c8372d;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 40px;
+    padding: 0 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    transition: border-color var(--ease);
+}
+
+.button:hover {
+    border-color: var(--accent);
+}
+
+.buttonIcon {
+    width: 16px;
+    height: 16px;
+}
+
+/* SLIDERS --------------------------------------------------------------------------------------------------------------------------------------- */
+.slider {
+    display: grid;
+    gap: var(--space-1);
+}
+
+.sliderLabel {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.slider input {
+    width: 100%;
+    height: 28px;
+    accent-color: var(--accent);
+}
+
+.warning {
+    padding: 10px var(--space-3);
+    background: color-mix(in srgb, #e8a33d 18%, var(--surface));
+    border-radius: var(--radius-md);
+    font-size: 13px;
+}
+
+.hint {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* FORMATS --------------------------------------------------------------------------------------------------------------------------------------- */
+.formats {
+    display: grid;
+}
+
+.format {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.format:last-child,
+.contrast:last-child {
+    border-bottom: 0;
+}
+
+.formatLabel {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.formatValue {
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.copy {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    color: var(--muted);
+}
+
+.copy:hover {
+    background: var(--soft);
+    color: var(--accent);
+}
+
+.copy svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* CONTRAST -------------------------------------------------------------------------------------------------------------------------------------- */
+.contrast {
+    display: grid;
+    grid-template-columns: 56px 1fr auto auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.sample {
+    display: grid;
+    place-items: center;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+}
+
+.ratio {
+    font-size: 14px;
+}
+
+.badge {
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.pass {
+    background: #d9f2e3;
+    color: #0f5a32;
+}
+
+.fail {
+    background: #fbdcdc;
+    color: #8a1c1c;
+}
+
+/* RESPONSIVENESS -------------------------------------------------------------------------------------------------------------------------------- */
+@media (max-width: 899px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 699px) {
+    .page {
+        padding: var(--space-4);
+    }
+
+    .card {
+        padding: var(--space-4);
+    }
+}
