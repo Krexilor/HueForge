@@ -4,18 +4,19 @@ import { useMemo, useState } from "react"
 import { Check, Copy, Pipette, RotateCcw } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
-import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
+import Dropdown from "../../components/common/Dropdown/Dropdown.jsx"
 import ExportPanel from "../../components/common/ExportPanel/ExportPanel.jsx"
+import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
 import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
 
 // HELPERS -----------------------------------------------------------------------------------------------------------------------------------------|
-import { parseColor, toHex, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
-import { STEPS, DEFAULT_OPTIONS, buildScale, buildNeutral, findPassing } from "../../lib/Color/Scale.js"
-import { colorLink } from "../../lib/Color/Links.js"
+import useCopy from "../../hooks/useCopy.js"
 import { slug } from "../../lib/Export/Tokens.js"
+import { colorLink } from "../../lib/Color/Links.js"
 import useSharedColor from "../../hooks/useSharedColor.js"
 import useSessionState from "../../hooks/useSessionState.js"
-import useCopy from "../../hooks/useCopy.js"
+import { parseColor, toHex, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
+import { STEPS, DEFAULT_OPTIONS, buildScale, buildNeutral, findPassing } from "../../lib/Color/Scale.js"
 
 // STYLES ------------------------------------------------------------------------------------------------------------------------------------------|
 import styles from "./ShadeFinder.module.css"
@@ -127,13 +128,17 @@ export default function ShadeFinder() {
                         </div>
                     </div>
 
-                    <label className = {styles.field}>
+                    <div className = {styles.field}>
                         <span className = {styles.label}>Base sits at step</span>
 
-                        <select className = {styles.text} value = {options.pin} onChange = {event => setOption("pin", Number(event.target.value))}>
-                            {STEPS.map((step, index) => <option key = {step} value = {index}>{step}</option>)}
-                        </select>
-                    </label>
+                        <Dropdown
+                            size = "lg"
+                            label = "Base step"
+                            value = {options.pin}
+                            options = {STEPS.map((step, index) => ({ value: index, label: String(step) }))}
+                            onChange = {value => setOption("pin", value)}
+                        />
+                    </div>
 
                     <label className = {styles.field}>
                         <span className = {styles.label}>Scale name</span>
