@@ -24,6 +24,12 @@ export function toLch(hex) {
     return { l, c, h }
 }
 
+export function rotateHsl(hex, offset) {
+    const { h = 0, s, l } = toHsl(hex)
+
+    return formatHex({ mode: "hsl", h: (h + offset + 360) % 360, s, l })
+}
+
 export function hexToHsv(hex) {
     const { h = 0, s, v } = toHsv(hex)
 

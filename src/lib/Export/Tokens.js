@@ -11,28 +11,40 @@ export function slug(name) {
     return name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "color"
 }
 
+function tokenName(name, step) {
+    return step === null ? name : `${name}-${step}`
+}
+
 export function buildTokens(format, groups) {
-    const lines = template => groups.flatMap(({ name, shades }) => shades.map(({ step, hex }) => template(slug(name), step, hex)))
+    const lines = template => groups.flatMap(group => {
+        const name = slug(group.name)
+
+        return group.shades
+            ? group.shades.map(({ step, hex }) => template(tokenName(name, step), hex))
+            : [template(tokenName(name, null), group.hex)]
+    })
 
     if (format === "tailwind") {
-        return `@theme {\n${lines((name, step, hex) => `    --color-${name}-${step}: ${hex};`).join("\n")}\n}`
+        return `@theme {\n${lines((token, hex) => `    --color-${token}: ${hex};`).join("\n")}\n}`
     }
 
     if (format === "scss") {
-        return lines((name, step, hex) => `$${name}-${step}: ${hex};`).join("\n")
+        return lines((token, hex) => `$${token}: ${hex};`).join("\n")
     }
 
     if (format === "json") {
         const tokens = {}
 
-        groups.forEach(({ name, shades }) => {
-            tokens[slug(name)] = Object.fromEntries(shades.map(({ step, hex }) => [step, { $value: hex, $type: "color" }]))
+        groups.forEach(group => {
+            tokens[slug(group.name)] = group.shades
+                ? Object.fromEntries(group.shades.map(({ step, hex }) => [step, { $value: hex, $type: "color" }]))
+                : { $value: group.hex, $type: "color" }
         })
 
         return JSON.stringify(tokens, null, 4)
     }
 
-    return `:root {\n${lines((name, step, hex) => `    --${name}-${step}: ${hex};`).join("\n")}\n}`
+    return `:root {\n${lines((token, hex) => `    --${token}: ${hex};`).join("\n")}\n}`
 }
 
 export function downloadText(filename, text) {

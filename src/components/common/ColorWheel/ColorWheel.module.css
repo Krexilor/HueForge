@@ -1,0 +1,63 @@
+/* WHEEL ----------------------------------------------------------------------------------------------------------------------------------------- */
+.wheel {
+    position: relative;
+    width: min(100%, 360px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border-radius: 50%;
+    cursor: grab;
+    touch-action: none;
+}
+
+.wheel:active {
+    cursor: grabbing;
+}
+
+.canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.25));
+}
+
+.svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+.ring {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.25);
+    stroke-width: 0.4;
+}
+
+.shape {
+    fill: rgba(255, 255, 255, 0.14);
+    stroke: rgba(255, 255, 255, 0.8);
+    stroke-width: 0.5;
+    stroke-linejoin: round;
+}
+
+.spoke {
+    stroke: rgba(255, 255, 255, 0.55);
+    stroke-width: 0.4;
+}
+
+.dot,
+.baseDot {
+    stroke: #ffffff;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+}
+
+.dot {
+    stroke-width: 1.4;
+}
+
+.baseDot {
+    stroke-width: 2;
+}

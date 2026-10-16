@@ -8,7 +8,7 @@ import useCopy from "../../../hooks/useCopy.js"
 import styles from "./ShareButton.module.css"
 
 // SHARE BUTTON ------------------------------------------------------------------------------------------------------------------------------------|
-export default function ShareButton({ hex, title }) {
+export default function ShareButton({ hex, title, params = {} }) {
     const { copied, copy } = useCopy()
     const done = copied === "share"
 
@@ -18,6 +18,8 @@ export default function ShareButton({ hex, title }) {
         url.search = ""
         url.hash = ""
         url.searchParams.set("c", hex.slice(1))
+
+        Object.entries(params).forEach(([key, value]) => url.searchParams.set(key, value))
 
         const link = url.toString()
         const isTouch = window.matchMedia("(pointer: coarse)").matches
