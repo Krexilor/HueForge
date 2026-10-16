@@ -1,0 +1,155 @@
+/* TRIGGER --------------------------------------------------------------------------------------------------------------------------------------- */
+.picker {
+    position: relative;
+    flex: none;
+}
+
+.trigger {
+    display: block;
+    width: 52px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 0 1px var(--line), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: box-shadow var(--ease), transform var(--ease);
+}
+
+.trigger:hover {
+    box-shadow: 0 0 0 2px var(--accent), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.trigger:active {
+    transform: scale(0.97);
+}
+
+/* PANEL ----------------------------------------------------------------------------------------------------------------------------------------- */
+.panel {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    z-index: 40;
+    display: grid;
+    gap: var(--space-4);
+    width: min(268px, calc(100vw - 64px));
+    padding: var(--space-4);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    animation: pop 0.14s ease;
+}
+
+@keyframes pop {
+    from {
+        opacity: 0;
+        transform: translateY(-4px) scale(0.98);
+    }
+}
+
+/* AREA ------------------------------------------------------------------------------------------------------------------------------------------ */
+.area {
+    position: relative;
+    height: 180px;
+    border-radius: var(--radius-md);
+    background:
+        linear-gradient(to top, #000, transparent),
+        linear-gradient(to right, #fff, hsl(var(--hue) 100% 50%));
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.thumb {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.35);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+/* HUE ------------------------------------------------------------------------------------------------------------------------------------------- */
+.hue {
+    width: 100%;
+    height: 14px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(to right, hsl(0 100% 50%), hsl(60 100% 50%), hsl(120 100% 50%), hsl(180 100% 50%), hsl(240 100% 50%), hsl(300 100% 50%), hsl(360 100% 50%));
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.hue::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: var(--thumb);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+}
+
+.hue::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: var(--thumb);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+}
+
+/* RGB ------------------------------------------------------------------------------------------------------------------------------------------- */
+.rgb {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-2);
+}
+
+.channel {
+    display: grid;
+    gap: var(--space-1);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-align: center;
+}
+
+.channel input {
+    width: 100%;
+    min-width: 0;
+    height: 38px;
+    padding: 0 var(--space-2);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    text-align: center;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.channel input::-webkit-outer-spin-button,
+.channel input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* PRESETS --------------------------------------------------------------------------------------------------------------------------------------- */
+.presets {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: var(--space-2);
+}
+
+.preset {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--line), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    transition: transform var(--ease);
+}
+
+.preset:hover {
+    transform: scale(1.15);
+}
