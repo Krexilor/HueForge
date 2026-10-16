@@ -27,7 +27,7 @@ export default function Overview() {
 
                 <div className = {styles.actions}>
                     <Link to = "/color-picker" className = {styles.primary}>Start with a color</Link>
-                    <Link to = "/export" className = {styles.secondary}>Jump to export</Link>
+                    <Link to = "/contrast-checker" className = {styles.secondary}>Check contrast</Link>
                 </div>
 
                 <div className = {styles.strip} aria-hidden = "true">
