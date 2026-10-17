@@ -314,7 +314,7 @@ export default function Harmony() {
                     Include a full 50 to 950 scale for each color in the export
                 </label>
 
-                <ExportPanel groups = {groups} filename = "harmony-palette" />
+                <ExportPanel data = {groups} filename = "harmony-palette" />
             </div>
         </div>
     )

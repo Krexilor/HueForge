@@ -276,7 +276,7 @@ export default function ShadeFinder() {
                 </section>
             </div>
 
-            <ExportPanel groups = {groups} filename = {`${slug(name)}-scale`} />
+            <ExportPanel data = {groups} filename = {`${slug(name)}-scale`} />
         </div>
     )
 }

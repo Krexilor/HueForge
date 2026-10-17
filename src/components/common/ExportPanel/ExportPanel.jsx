@@ -3,8 +3,8 @@ import { useState } from "react"
 import { Check, Copy, Download } from "lucide-react"
 
 // HELPERS -----------------------------------------------------------------------------------------------------------------------------------------|
-import { FORMATS, buildTokens, downloadText } from "../../../lib/Export/Tokens.js"
 import useCopy from "../../../hooks/useCopy.js"
+import { FORMATS, buildTokens, downloadText } from "../../../lib/Export/Tokens.js"
 
 // STYLES ------------------------------------------------------------------------------------------------------------------------------------------|
 import styles from "./ExportPanel.module.css"
@@ -21,12 +21,12 @@ function renderLine(line) {
 }
 
 // EXPORT PANEL ------------------------------------------------------------------------------------------------------------------------------------|
-export default function ExportPanel({ groups, filename = "hueforge-colors" }) {
-    const [formatId, setFormatId] = useState("css")
+export default function ExportPanel({ data, filename = "hueforge-colors", formats = FORMATS, build = buildTokens, unit = "colors" }) {
+    const [formatId, setFormatId] = useState(formats[0].id)
     const { copied, copy } = useCopy()
 
-    const format = FORMATS.find(item => item.id === formatId)
-    const text = buildTokens(formatId, groups)
+    const format = formats.find(item => item.id === formatId) ?? formats[0]
+    const text = build(format.id, data)
     const file = `${filename}.${format.extension}`
     const count = (text.match(HEX_PATTERN) || []).length
 
@@ -49,8 +49,8 @@ export default function ExportPanel({ groups, filename = "hueforge-colors" }) {
             </div>
 
             <div className = {styles.tabs} role = "group" aria-label = "Export format">
-                {FORMATS.map(item => (
-                    <button key = {item.id} className = {styles.tab} aria-pressed = {formatId === item.id} onClick = {() => setFormatId(item.id)}>
+                {formats.map(item => (
+                    <button key = {item.id} className = {styles.tab} aria-pressed = {format.id === item.id} onClick = {() => setFormatId(item.id)}>
                         {item.label}
                     </button>
                 ))}
@@ -59,7 +59,7 @@ export default function ExportPanel({ groups, filename = "hueforge-colors" }) {
             <div className = {styles.editor}>
                 <div className = {styles.bar}>
                     <span>{file}</span>
-                    <span>{count} colors</span>
+                    <span>{count} {unit}</span>
                 </div>
 
                 <pre className = {styles.code}>
