@@ -10,6 +10,7 @@ import Harmony from "./pages/Harmony/Harmony.jsx"
 import Overview from "./pages/Overview/Overview.jsx"
 import ColorPicker from "./pages/ColorPicker/ColorPicker.jsx"
 import ShadeFinder from "./pages/ShadeFinder/ShadeFinder.jsx"
+import ContrastChecker from "./pages/ContrastChecker/ContrastChecker.jsx"
 
 // APPLICATION -------------------------------------------------------------------------------------------------------------------------------------|
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
                     <Route path = "color-picker" element = {<ColorPicker />} />
                     <Route path = "shade-finder" element = {<ShadeFinder />} />
                     <Route path = "harmony" element = {<Harmony />} />
+                    <Route path = "contrast-checker" element = {<ContrastChecker />} />
                     <Route path = "*" element = {<Navigate to = "/" replace />} />
                 </Route>
             </Routes>
