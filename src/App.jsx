@@ -1,11 +1,12 @@
 // LIBRARIES ---------------------------------------------------------------------------------------------------------------------------------------|
-import { Routes, Route, Navigate } from "react-router"
+import { useEffect, useRef, useState } from "react"
+import { Routes, Route, Navigate, useLocation } from "react-router"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
 import SessionProvider from "./context/SessionProvider.jsx"
+import Sidebar from "./components/layout/Sidebar/Sidebar.jsx"
 
 // PAGES -------------------------------------------------------------------------------------------------------------------------------------------|
-import Home from "./pages/Home.jsx"
 import Harmony from "./pages/Harmony/Harmony.jsx"
 import Overview from "./pages/Overview/Overview.jsx"
 import ColorPicker from "./pages/ColorPicker/ColorPicker.jsx"
@@ -14,18 +15,31 @@ import ContrastChecker from "./pages/ContrastChecker/ContrastChecker.jsx"
 
 // APPLICATION -------------------------------------------------------------------------------------------------------------------------------------|
 export default function App() {
+    const [isOpen, setIsOpen] = useState(false)
+    const { pathname } = useLocation()
+    const contentRef = useRef(null)
+
+    useEffect(() => {
+        contentRef.current.scrollTo(0, 0)
+    }, [pathname])
+
     return (
         <SessionProvider>
-            <Routes>
-                <Route path = "/" element = {<Home />}>
-                    <Route index element = {<Overview />} />
-                    <Route path = "color-picker" element = {<ColorPicker />} />
-                    <Route path = "shade-finder" element = {<ShadeFinder />} />
-                    <Route path = "harmony" element = {<Harmony />} />
-                    <Route path = "contrast-checker" element = {<ContrastChecker />} />
-                    <Route path = "*" element = {<Navigate to = "/" replace />} />
-                </Route>
-            </Routes>
+            <div className = "app">
+                <Sidebar isOpen = {isOpen} onClose = {() => setIsOpen(false)} />
+
+                <main className = "appContent" ref = {contentRef}>
+                    <Routes>
+                        <Route index element = {<Overview />} />
+                        <Route path = "color-picker" element = {<ColorPicker />} />
+                        <Route path = "shade-finder" element = {<ShadeFinder />} />
+                        <Route path = "harmony" element = {<Harmony />} />
+                        <Route path = "contrast-checker" element = {<ContrastChecker />} />
+                        
+                        <Route path = "*" element = {<Navigate to = "/" replace />} />
+                    </Routes>
+                </main>
+            </div>
         </SessionProvider>
     )
 }

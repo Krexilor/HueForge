@@ -150,7 +150,7 @@ export default function ContrastChecker() {
     function select(foreground, backdrop) {
         setTextOverride(foreground)
         setBackground(backdrop)
-        window.scrollTo({ top: 0, behavior: "smooth" })
+        document.querySelector("main").scrollTo({ top: 0, behavior: "smooth" })
     }
 
     function addColors(colors, replace = false) {
