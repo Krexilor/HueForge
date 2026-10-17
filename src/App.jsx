@@ -11,6 +11,7 @@ import Harmony from "./pages/Harmony/Harmony.jsx"
 import Overview from "./pages/Overview/Overview.jsx"
 import ColorPicker from "./pages/ColorPicker/ColorPicker.jsx"
 import ShadeFinder from "./pages/ShadeFinder/ShadeFinder.jsx"
+import ColorVision from "./pages/ColorVision/ColorVision.jsx"
 import ContrastChecker from "./pages/ContrastChecker/ContrastChecker.jsx"
 
 // APPLICATION -------------------------------------------------------------------------------------------------------------------------------------|
@@ -35,6 +36,7 @@ export default function App() {
                         <Route path = "shade-finder" element = {<ShadeFinder />} />
                         <Route path = "harmony" element = {<Harmony />} />
                         <Route path = "contrast-checker" element = {<ContrastChecker />} />
+                        <Route path = "color-vision" element = {<ColorVision />} />
                         
                         <Route path = "*" element = {<Navigate to = "/" replace />} />
                     </Routes>
