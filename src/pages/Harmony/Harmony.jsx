@@ -68,7 +68,7 @@ export default function Harmony() {
     const roleOptions = ROLES.slice(0, palette.length).map(role => ({
         value: role,
         label: role[0].toUpperCase() + role.slice(1),
-        swatch: byRole[role],
+        swatch: byRole[role]
     }))
 
     const groups = palette

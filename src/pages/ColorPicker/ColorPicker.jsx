@@ -21,12 +21,12 @@ import styles from "./ColorPicker.module.css"
 const SLIDERS = [
     { id: "l", label: "Lightness", max: 1, step: 0.001, format: value => `${(value * 100).toFixed(1)}%` },
     { id: "c", label: "Chroma", max: 0.4, step: 0.001, format: value => value.toFixed(3) },
-    { id: "h", label: "Hue", max: 360, step: 0.5, format: value => `${value.toFixed(1)}°` },
+    { id: "h", label: "Hue", max: 360, step: 0.5, format: value => `${value.toFixed(1)}°` }
 ]
 
 const CONTRAST_TARGETS = [
     { label: "White text", value: "#ffffff" },
-    { label: "Black text", value: "#000000" },
+    { label: "Black text", value: "#000000" }
 ]
 
 function stops(count, build) {
@@ -48,7 +48,7 @@ export default function ColorPicker() {
     const gradients = {
         l: `linear-gradient(to right, ${stops(10, t => `oklch(${t} ${lch.c} ${lch.h})`)})`,
         c: `linear-gradient(to right, ${stops(10, t => `oklch(${lch.l} ${t * 0.4} ${lch.h})`)})`,
-        h: `linear-gradient(to right, ${stops(12, t => `oklch(${lch.l} ${lch.c} ${t * 360})`)})`,
+        h: `linear-gradient(to right, ${stops(12, t => `oklch(${lch.l} ${lch.c} ${t * 360})`)})`
     }
 
     function apply(color) {

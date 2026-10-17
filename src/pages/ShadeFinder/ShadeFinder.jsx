@@ -27,14 +27,14 @@ const TARGETS = [3, 4.5, 7]
 
 const BACKGROUNDS = [
     { label: "White", value: "#ffffff" },
-    { label: "Black", value: "#000000" },
+    { label: "Black", value: "#000000" }
 ]
 
 const SLIDERS = [
     { id: "lightest", label: "Lightest shade", min: 0.9, max: 0.99, step: 0.005, format: value => `${(value * 100).toFixed(1)}%` },
     { id: "darkest", label: "Darkest shade", min: 0.1, max: 0.4, step: 0.005, format: value => `${(value * 100).toFixed(1)}%` },
     { id: "taper", label: "Edge chroma taper", min: 0, max: 1, step: 0.01, format: value => `${Math.round(value * 100)}%` },
-    { id: "shift", label: "Hue shift", min: -30, max: 30, step: 1, format: value => `${value > 0 ? "+" : ""}${value}°` },
+    { id: "shift", label: "Hue shift", min: -30, max: 30, step: 1, format: value => `${value > 0 ? "+" : ""}${value}°` }
 ]
 
 function Ratio({ hex, background, label }) {

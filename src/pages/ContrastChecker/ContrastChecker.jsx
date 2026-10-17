@@ -178,6 +178,11 @@ export default function ContrastChecker() {
                 <section className = {styles.card}>
                     <h2 className = {styles.heading}>Colors</h2>
 
+                    <div className = {styles.pair} style = {{ background, color: text }}>
+                        <span className = {styles.pairLarge}>Aa</span>
+                        <span className = {styles.pairSmall}>The quick brown fox</span>
+                    </div>
+
                     <ColorField label = "Text color" value = {text} onChange = {setTextOverride} />
 
                     <button className = {styles.swap} onClick = {swap}>
@@ -189,6 +194,7 @@ export default function ContrastChecker() {
                 </section>
 
                 <section className = {styles.card}>
+                    <h2 className = {styles.heading}>Result</h2>
                     <div className = {styles.scores}>
                         <div className = {styles.score}>
                             <span className = {styles.big}>{pair.ratio.toFixed(2)}:1</span>
