@@ -4,6 +4,7 @@ import { Link } from "react-router"
 import { ArrowRight, Check, Copy, Pipette, Shuffle } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
+import Slider from "../../components/common/Slider/Slider.jsx"
 import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
 import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
 
@@ -28,6 +29,10 @@ const CONTRAST_TARGETS = [
     { label: "Black text", value: "#000000" },
 ]
 
+function stops(count, build) {
+    return Array.from({ length: count + 1 }, (_, index) => build(index / count)).join(", ")
+}
+
 // COLOR PICKER -------------------------------------------------------------------------------------------------------------------------------------|
 export default function ColorPicker() {
     const { lch, setLch, hex } = useSharedColor()
@@ -39,6 +44,12 @@ export default function ColorPicker() {
     const inGamut = isInGamut(lch)
     const invalid = draft !== null && !parseColor(draft)
     const canUseEyeDropper = "EyeDropper" in window
+
+    const gradients = {
+        l: `linear-gradient(to right, ${stops(10, t => `oklch(${t} ${lch.c} ${lch.h})`)})`,
+        c: `linear-gradient(to right, ${stops(10, t => `oklch(${lch.l} ${t * 0.4} ${lch.h})`)})`,
+        h: `linear-gradient(to right, ${stops(12, t => `oklch(${lch.l} ${lch.c} ${t * 360})`)})`,
+    }
 
     function apply(color) {
         const { l, c, h = 0 } = color
@@ -122,22 +133,17 @@ export default function ColorPicker() {
                     <h2 className = {styles.heading}>Fine tune (OKLCH)</h2>
 
                     {SLIDERS.map(({ id, label, max, step, format }) => (
-                        <div key = {id} className = {styles.slider}>
-                            <label className = {styles.sliderLabel} htmlFor = {`slider-${id}`}>
-                                <span>{label}</span>
-                                <span>{format(lch[id])}</span>
-                            </label>
-
-                            <input
-                                id = {`slider-${id}`}
-                                type = "range"
-                                min = {0}
-                                max = {max}
-                                step = {step}
-                                value = {lch[id]}
-                                onChange = {event => setLch({ ...lch, [id]: Number(event.target.value) })}
-                            />
-                        </div>
+                        <Slider
+                            key = {id}
+                            label = {label}
+                            value = {lch[id]}
+                            min = {0}
+                            max = {max}
+                            step = {step}
+                            format = {format}
+                            gradient = {gradients[id]}
+                            onChange = {value => setLch({ ...lch, [id]: value })}
+                        />
                     ))}
 
                     {!inGamut && <p className = {styles.warning}>Outside the sRGB gamut. Showing the nearest displayable color.</p>}

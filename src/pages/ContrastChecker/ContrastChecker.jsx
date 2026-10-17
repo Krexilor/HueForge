@@ -4,6 +4,7 @@ import { useLayoutEffect, useMemo, useState } from "react"
 import { ArrowLeftRight, Plus, Sparkles, Trash2, X } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
+import Slider from "../../components/common/Slider/Slider.jsx"
 import ExportPanel from "../../components/common/ExportPanel/ExportPanel.jsx"
 import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
 import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
@@ -230,12 +231,7 @@ export default function ContrastChecker() {
 
                 <div className = {styles.controls}>
                     <div className = {styles.slider}>
-                        <label className = {styles.sliderLabel} htmlFor = "contrast-size">
-                            <span>Font size</span>
-                            <span>{size}px</span>
-                        </label>
-
-                        <input id = "contrast-size" type = "range" min = {12} max = {64} step = {1} value = {size} onChange = {event => setSize(Number(event.target.value))} />
+                        <Slider label = "Font size" value = {size} min = {12} max = {64} step = {1} format = {value => `${value}px`} onChange = {setSize} />
                     </div>
 
                     <div className = {styles.segments} role = "group" aria-label = "Font weight">

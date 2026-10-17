@@ -4,20 +4,21 @@ import { useLayoutEffect, useMemo, useState } from "react"
 import { ArrowRight, Check, Copy, Lock, LockOpen, Moon, Shuffle, Sun } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
-import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
-import ColorWheel from "../../components/common/ColorWheel/ColorWheel.jsx"
+import Slider from "../../components/common/Slider/Slider.jsx"
 import Dropdown from "../../components/common/Dropdown/Dropdown.jsx"
+import ColorWheel from "../../components/common/ColorWheel/ColorWheel.jsx"
 import ExportPanel from "../../components/common/ExportPanel/ExportPanel.jsx"
 import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
+import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
 
 // HELPERS -----------------------------------------------------------------------------------------------------------------------------------------|
-import { parseColor, toHex, toLch, randomColor, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
-import { TYPES, ROLES, PROPORTIONS, buildHarmony } from "../../lib/Color/Harmony.js"
-import { DEFAULT_OPTIONS, buildScale } from "../../lib/Color/Scale.js"
+import useCopy from "../../hooks/useCopy.js"
 import { colorLink } from "../../lib/Color/Links.js"
 import useSharedColor from "../../hooks/useSharedColor.js"
 import useSessionState from "../../hooks/useSessionState.js"
-import useCopy from "../../hooks/useCopy.js"
+import { DEFAULT_OPTIONS, buildScale } from "../../lib/Color/Scale.js"
+import { TYPES, ROLES, PROPORTIONS, buildHarmony } from "../../lib/Color/Harmony.js"
+import { parseColor, toHex, toLch, randomColor, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
 
 // STYLES ------------------------------------------------------------------------------------------------------------------------------------------|
 import styles from "./Harmony.module.css"
@@ -187,13 +188,8 @@ export default function Harmony() {
                         <p className = {styles.hint}>{type.description}</p>
                     </div>
 
-                    <div className = {styles.slider}>
-                        <label className = {styles.sliderLabel} htmlFor = "harmony-spread">
-                            <span>Spread</span>
-                            <span>{spread}°</span>
-                        </label>
-
-                        <input id = "harmony-spread" type = "range" min = {10} max = {60} step = {1} value = {spread} disabled = {!type.hasSpread} onChange = {event => setSpread(Number(event.target.value))} />
+                    <div className = {styles.field}>
+                        <Slider label = "Spread" value = {spread} min = {10} max = {60} step = {1} format = {value => `${value}°`} disabled = {!type.hasSpread} onChange = {setSpread} />
                         {!type.hasSpread && <p className = {styles.hint}>Spread applies to analogous and split complementary.</p>}
                     </div>
 

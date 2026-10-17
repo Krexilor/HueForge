@@ -4,6 +4,7 @@ import { useMemo, useState } from "react"
 import { Check, Copy, Pipette, RotateCcw } from "lucide-react"
 
 // COMPONENTS --------------------------------------------------------------------------------------------------------------------------------------|
+import Slider from "../../components/common/Slider/Slider.jsx"
 import Dropdown from "../../components/common/Dropdown/Dropdown.jsx"
 import ExportPanel from "../../components/common/ExportPanel/ExportPanel.jsx"
 import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
@@ -150,14 +151,7 @@ export default function ShadeFinder() {
 
                 <div className = {styles.sliders}>
                     {SLIDERS.map(({ id, label, min, max, step, format }) => (
-                        <div key = {id} className = {styles.slider}>
-                            <label className = {styles.sliderLabel} htmlFor = {`slider-${id}`}>
-                                <span>{label}</span>
-                                <span>{format(options[id])}</span>
-                            </label>
-
-                            <input id = {`slider-${id}`} type = "range" min = {min} max = {max} step = {step} value = {options[id]} onChange = {event => setOption(id, Number(event.target.value))} />
-                        </div>
+                        <Slider key = {id} label = {label} value = {options[id]} min = {min} max = {max} step = {step} format = {format} onChange = {value => setOption(id, value)} />
                     ))}
                 </div>
 
