@@ -14,6 +14,7 @@ import ShadeFinder from "./pages/ShadeFinder/ShadeFinder.jsx"
 import ColorVision from "./pages/ColorVision/ColorVision.jsx"
 import GradientStudio from "./pages/GradientStudio/GradientStudio.jsx"
 import ContrastChecker from "./pages/ContrastChecker/ContrastChecker.jsx"
+import PalettePlayground from "./pages/PalettePlayground/PalettePlayground.jsx"
 
 // APPLICATION -------------------------------------------------------------------------------------------------------------------------------------|
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
                         <Route path = "gradient-studio" element = {<GradientStudio />} />
                         <Route path = "contrast-checker" element = {<ContrastChecker />} />
                         <Route path = "color-vision" element = {<ColorVision />} />
+                        <Route path = "palette-playground" element = {<PalettePlayground />} />
                         
                         <Route path = "*" element = {<Navigate to = "/" replace />} />
                     </Routes>

@@ -1,0 +1,369 @@
+/* PAGE ------------------------------------------------------------------------------------------------------------------------------------------ */
+.page {
+    display: grid;
+    gap: var(--space-5);
+    max-width: var(--content-width);
+    margin: 0 auto;
+    padding: var(--space-6) var(--space-5) var(--space-7);
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding-bottom: var(--space-2);
+}
+
+.title {
+    font-size: 34px;
+    letter-spacing: -0.02em;
+}
+
+.subtitle {
+    max-width: 36em;
+    margin-top: var(--space-2);
+    color: var(--muted);
+    line-height: 1.6;
+    text-wrap: pretty;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    padding: var(--space-6);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+}
+
+.head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3) var(--space-5);
+}
+
+.heading {
+    font-size: 20px;
+    letter-spacing: -0.01em;
+}
+
+.hint {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 36px;
+    padding: 0 12px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    transition: border-color var(--ease);
+}
+
+.button:hover {
+    border-color: var(--accent);
+}
+
+.buttonIcon {
+    width: 14px;
+    height: 14px;
+}
+
+.badge {
+    padding: 3px 12px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.pass {
+    background: #d9f2e3;
+    color: #0f5a32;
+}
+
+.fail {
+    background: #fbdcdc;
+    color: #8a1c1c;
+}
+
+/* COLORS ---------------------------------------------------------------------------------------------------------------------------------------- */
+.roles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+}
+
+.role {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: var(--bg);
+    border-radius: var(--radius-md);
+}
+
+.roleHead {
+    display: grid;
+    gap: 2px;
+}
+
+.inputs {
+    display: flex;
+    gap: var(--space-3);
+}
+
+.text {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    padding: 0 var(--space-3);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    transition: border-color var(--ease), box-shadow var(--ease);
+}
+
+.text:focus-visible {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.invalid,
+.invalid:focus-visible {
+    border-color: #c8372d;
+}
+
+/* PREVIEW --------------------------------------------------------------------------------------------------------------------------------------- */
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-6);
+}
+
+.segments {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.segments::before {
+    content: attr(aria-label);
+    flex: 0 0 100%;
+    margin-bottom: 2px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.segment {
+    padding: 7px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-full);
+    font-size: 14px;
+    transition: border-color var(--ease);
+}
+
+.segment:hover {
+    border-color: var(--accent);
+}
+
+.segment[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: transparent;
+    color: var(--accent-fg);
+}
+
+.stage {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.compare {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.pane {
+    display: grid;
+    gap: var(--space-2);
+    min-width: 0;
+    margin: 0;
+}
+
+.paneLabel {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* TOKENS ---------------------------------------------------------------------------------------------------------------------------------------- */
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-2);
+}
+
+.groups {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.roleRow {
+    display: grid;
+    grid-template-columns: 96px repeat(6, 1fr);
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.roleName {
+    font-weight: 500;
+}
+
+.tile {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    padding: 8px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    text-align: left;
+    transition: transform var(--ease);
+}
+
+.tile:hover {
+    transform: translateY(-2px);
+}
+
+.tileSwatch {
+    height: 34px;
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.tileName {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.tileHex {
+    font-size: 11px;
+}
+
+/* CHECKS ---------------------------------------------------------------------------------------------------------------------------------------- */
+.tableWrap {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table th,
+.table td {
+    padding: 9px 8px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+}
+
+.table th {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.table td .badge {
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+.exportBlock {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-5);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    font-size: 14px;
+}
+
+.toggle input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+}
+
+/* RESPONSIVENESS -------------------------------------------------------------------------------------------------------------------------------- */
+@media (max-width: 899px) {
+    .roles {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .compare {
+        grid-template-columns: 1fr;
+    }
+
+    .tiles {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .roleRow {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .roleName {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 699px) {
+    .page {
+        padding: var(--space-4);
+    }
+
+    .card {
+        padding: var(--space-4);
+    }
+
+    .roles {
+        grid-template-columns: 1fr;
+    }
+}
