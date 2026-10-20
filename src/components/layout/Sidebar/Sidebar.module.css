@@ -1,17 +1,33 @@
 /* SIDEBAR --------------------------------------------------------------------------------------------------------------------------------------- */
 .sidebar {
+    --edge: var(--space-3);
+
     display: flex;
     flex-direction: column;
+    gap: var(--space-5);
     width: var(--sidebar-width);
-    padding: var(--space-4) var(--space-3);
+    padding: var(--space-4) var(--edge);
     background: var(--surface);
     border-right: 1px solid var(--line);
     overflow-y: auto;
+    scrollbar-width: thin;
     z-index: 30;
 }
 
 .scrim {
-    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.24s ease;
+}
+
+.show {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* BRAND ----------------------------------------------------------------------------------------------------------------------------------------- */
@@ -19,29 +35,61 @@
     display: flex;
     align-items: center;
     gap: var(--space-3);
-    padding: var(--space-1) var(--space-2) var(--space-5);
+    padding: var(--space-1) var(--space-2) 0;
 }
 
 .logo {
     flex: none;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     object-fit: contain;
+}
+
+.identity {
+    display: grid;
+    min-width: 0;
 }
 
 .name {
     font-family: var(--font-display);
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+}
+
+.tagline {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.close {
+    display: none;
 }
 
 /* NAVIGATION ------------------------------------------------------------------------------------------------------------------------------------ */
 .nav {
     display: grid;
+    gap: var(--space-4);
+    align-content: start;
+}
+
+.group {
+    display: grid;
     gap: 2px;
 }
 
+.groupLabel {
+    padding: 0 10px 6px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
 .link {
+    position: relative;
     display: flex;
     align-items: center;
     gap: var(--space-3);
@@ -56,10 +104,27 @@
     color: var(--fg);
 }
 
-.active {
+.link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+}
+
+.active,
+.active:hover {
     background: var(--soft);
     color: var(--accent);
     font-weight: 600;
+}
+
+.active::before {
+    content: "";
+    position: absolute;
+    top: 9px;
+    bottom: 9px;
+    left: calc(var(--edge) * -1);
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--accent);
 }
 
 .icon {
@@ -68,64 +133,132 @@
     height: 20px;
 }
 
+.text {
+    display: grid;
+    min-width: 0;
+}
+
+.label {
+    font-size: 14.5px;
+}
+
+.description {
+    color: var(--muted);
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
 /* FOOTER ---------------------------------------------------------------------------------------------------------------------------------------- */
 .note {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-2);
     margin-top: auto;
-    padding: var(--space-4) 10px 0;
+    padding: var(--space-3);
+    background: var(--bg);
+    border-radius: var(--radius-md);
+    color: var(--muted);
     font-size: 12.5px;
+    line-height: 1.5;
+}
+
+.noteIcon {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    color: var(--accent);
+}
+
+/* RAIL ------------------------------------------------------------------------------------------------------------------------------------------ */
+.rail {
+    --edge: 10px;
+
+    width: var(--sidebar-rail);
+}
+
+.rail .identity,
+.rail .text,
+.rail .note,
+.rail .groupLabel {
+    display: none;
+}
+
+.rail .brand {
+    justify-content: center;
+    padding-inline: 0;
+}
+
+.rail .link {
+    justify-content: center;
+}
+
+.rail .group {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--line);
+}
+
+/* DRAWER ---------------------------------------------------------------------------------------------------------------------------------------- */
+.drawer {
+    --edge: var(--space-4);
+
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 40;
+    width: min(86vw, 320px);
+    padding-top: calc(var(--space-4) + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+    border-right: 0;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    transform: translateX(-102%);
+    visibility: hidden;
+    transition: transform 0.24s ease, visibility 0s linear 0.24s;
+}
+
+.open {
+    transform: none;
+    visibility: visible;
+    box-shadow: var(--shadow);
+    transition: transform 0.24s ease;
+}
+
+.drawer .close {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
     color: var(--muted);
 }
 
-/* RESPONSIVENESS -------------------------------------------------------------------------------------------------------------------------------- */
-@media (max-width: 1099px) {
-    .sidebar {
-        width: var(--sidebar-rail);
-        padding-inline: 10px;
-    }
-
-    .name,
-    .label,
-    .note {
-        display: none;
-    }
-
-    .brand,
-    .link {
-        justify-content: center;
-    }
+.drawer .close svg {
+    width: 18px;
+    height: 18px;
 }
 
-/* MOBILE ---------------------------------------------------------------------------------------------------------------------------------------- */
-@media (max-width: 699px) {
-    .sidebar {
-        position: fixed;
-        inset: 0 auto 0 0;
-        width: 272px;
-        transform: translateX(-100%);
-        transition: transform 0.22s ease;
-    }
+.drawer .link {
+    gap: var(--space-4);
+    min-height: 52px;
+    padding: 8px 12px;
+}
 
-    .open {
-        transform: none;
-        box-shadow: var(--shadow);
-    }
+.drawer .icon {
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    border-radius: var(--radius-md);
+    background: var(--bg);
+    transition: background var(--ease), color var(--ease);
+}
 
-    .open .name,
-    .open .label,
-    .open .note {
-        display: revert;
-    }
+.drawer .active .icon {
+    background: var(--accent);
+    color: var(--accent-fg);
+}
 
-    .open .brand,
-    .open .link {
-        justify-content: flex-start;
-    }
-
-    .scrim.show {
-        display: block;
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.4);
-        z-index: 25;
-    }
+.drawer .label {
+    font-size: 15.5px;
 }

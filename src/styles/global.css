@@ -5,8 +5,20 @@
     height: 100dvh;
 }
 
-.appContent {
+.appDrawer {
+    grid-template-columns: 1fr;
+}
+
+.appBody {
+    display: flex;
+    flex-direction: column;
     min-width: 0;
+    min-height: 0;
+}
+
+.appContent {
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
 }
 
