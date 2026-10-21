@@ -10,7 +10,7 @@ export const project = {
 export const author = {
     name: "Aarav Malik (Krexilor)",
     role: "Self-taught developer",
-    bio: "I started with Blender and Unreal Engine, then picked up Python and C, and now focus on C++. I'm self-taught, and I'm currently learning AI/ML and game development alongside it. HueForge is one of my web projects, built with React. I enjoy creating tools that are useful, fast and fun to use.",
+    bio: "Exploring C++ beyond the surface. Focused on systems engineering, backend architecture, performance, and understanding how software works under the hood. HueForge is one of my web projects, built with React. I enjoy creating tools that are useful, fast and fun to use.",
     links: [
         { label: "GitHub profile", href: "https://github.com/krexilor" },
     ]
