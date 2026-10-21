@@ -49,7 +49,7 @@ HueForge collects no user data. There is no analytics, no tracking and no server
 
 ## Built with
 
-| | |
+| Libraries/Frameworks | Purpose |
 | --- | --- |
 | [React 19](https://react.dev/) | UI |
 | [Vite](https://vite.dev/) | Build tooling and dev server |
