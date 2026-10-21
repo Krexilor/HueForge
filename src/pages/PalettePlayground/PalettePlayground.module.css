@@ -1,5 +1,6 @@
 /* PAGE ------------------------------------------------------------------------------------------------------------------------------------------ */
 .page {
+    container-type: inline-size;
     display: grid;
     gap: var(--space-5);
     max-width: var(--content-width);
@@ -17,7 +18,7 @@
 }
 
 .title {
-    font-size: 34px;
+    font-size: clamp(26px, 6vw, 34px);
     letter-spacing: -0.02em;
 }
 
@@ -33,6 +34,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
+    min-width: 0;
     padding: var(--space-6);
     background: var(--surface);
     border: 1px solid var(--line);
@@ -69,9 +71,24 @@
     gap: var(--space-2);
 }
 
+.button,
+.segment,
+.tile {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.button:focus-visible,
+.segment:focus-visible,
+.tile:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
 .button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     min-height: 36px;
     padding: 0 12px;
@@ -82,7 +99,7 @@
     transition: border-color var(--ease);
 }
 
-.button:hover {
+.button:active {
     border-color: var(--accent);
 }
 
@@ -112,13 +129,15 @@
 /* COLORS ---------------------------------------------------------------------------------------------------------------------------------------- */
 .roles {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: var(--space-3);
 }
 
 .role {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: var(--space-3);
+    min-width: 0;
     padding: var(--space-4);
     background: var(--bg);
     border-radius: var(--radius-md);
@@ -131,11 +150,13 @@
 
 .inputs {
     display: flex;
+    min-width: 0;
     gap: var(--space-3);
 }
 
 .text {
     flex: 1;
+    width: 100%;
     min-width: 0;
     height: 44px;
     padding: 0 var(--space-3);
@@ -143,6 +164,7 @@
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     font-family: var(--font-mono);
+    font-size: 16px;
     transition: border-color var(--ease), box-shadow var(--ease);
 }
 
@@ -190,7 +212,7 @@
     transition: border-color var(--ease);
 }
 
-.segment:hover {
+.segment:active {
     border-color: var(--accent);
 }
 
@@ -203,6 +225,7 @@
 .stage {
     display: grid;
     gap: var(--space-4);
+    min-width: 0;
 }
 
 .compare {
@@ -258,8 +281,8 @@
     transition: transform var(--ease);
 }
 
-.tile:hover {
-    transform: translateY(-2px);
+.tile:active {
+    transform: scale(0.97);
 }
 
 .tileSwatch {
@@ -280,6 +303,7 @@
 /* CHECKS ---------------------------------------------------------------------------------------------------------------------------------------- */
 .tableWrap {
     overflow-x: auto;
+    overscroll-behavior-x: contain;
 }
 
 .table {
@@ -331,8 +355,49 @@
     accent-color: var(--accent);
 }
 
+/* INTERACTION ----------------------------------------------------------------------------------------------------------------------------------- */
+@media (hover: hover) {
+    .button:hover,
+    .segment:hover {
+        border-color: var(--accent);
+    }
+
+    .tile:hover {
+        transform: translateY(-2px);
+    }
+}
+
+@media (pointer: coarse) {
+    .button,
+    .segment {
+        min-height: 44px;
+    }
+
+    .tile {
+        min-height: 44px;
+    }
+
+    .toggle {
+        min-height: 44px;
+    }
+
+    .toggle input {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .text,
+    .button,
+    .segment,
+    .tile {
+        transition: none;
+    }
+}
+
 /* RESPONSIVENESS -------------------------------------------------------------------------------------------------------------------------------- */
-@media (max-width: 899px) {
+@container (max-width: 719px) {
     .roles {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -354,16 +419,52 @@
     }
 }
 
-@media (max-width: 699px) {
-    .page {
-        padding: var(--space-4);
-    }
-
+@container (max-width: 559px) {
     .card {
         padding: var(--space-4);
+        gap: var(--space-4);
     }
 
     .roles {
         grid-template-columns: 1fr;
+    }
+
+    .head > .tools {
+        flex: 1 1 100%;
+    }
+
+    .tools > .button {
+        flex: 1 1 auto;
+    }
+
+    .toggle {
+        padding: var(--space-4);
+    }
+}
+
+@container (max-width: 439px) {
+    .tiles {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .table {
+        font-size: 13px;
+    }
+
+    .table th,
+    .table td {
+        padding: 8px 6px;
+    }
+
+    .table td .badge {
+        min-width: 52px;
+        padding-inline: 8px;
+    }
+}
+
+@media (max-width: 699px) {
+    .page {
+        gap: var(--space-4);
+        padding: var(--space-4);
     }
 }

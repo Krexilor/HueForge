@@ -165,6 +165,9 @@ export default function Harmony() {
                                 value = {draft ?? hex}
                                 aria-label = "Base color value"
                                 aria-invalid = {invalid}
+                                autoCapitalize = "off"
+                                autoCorrect = "off"
+                                autoComplete = "off"
                                 spellCheck = "false"
                                 onChange = {event => handleText(event.target.value)}
                                 onBlur = {() => setDraft(null)}

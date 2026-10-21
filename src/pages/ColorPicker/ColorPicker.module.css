@@ -1,5 +1,6 @@
 /* PAGE ------------------------------------------------------------------------------------------------------------------------------------------ */
 .page {
+    container-type: inline-size;
     display: grid;
     gap: var(--space-5);
     max-width: var(--content-width);
@@ -17,7 +18,7 @@
 }
 
 .title {
-    font-size: 34px;
+    font-size: clamp(26px, 6vw, 34px);
     letter-spacing: -0.02em;
 }
 
@@ -48,6 +49,17 @@
 .heading {
     font-size: 20px;
     letter-spacing: -0.01em;
+}
+
+.button,
+.copy {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.button:focus-visible,
+.copy:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
 }
 
 /* PREVIEW --------------------------------------------------------------------------------------------------------------------------------------- */
@@ -107,6 +119,7 @@
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
     font-family: var(--font-mono);
+    font-size: 16px;
     transition: border-color var(--ease), box-shadow var(--ease);
 }
 
@@ -135,6 +148,7 @@
 .button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     min-height: 36px;
     padding: 0 10px;
@@ -146,7 +160,7 @@
     transition: border-color var(--ease), background var(--ease);
 }
 
-.button:hover {
+.button:active {
     border-color: var(--accent);
 }
 
@@ -157,7 +171,7 @@
     color: var(--accent-fg);
 }
 
-.solid:hover {
+.solid:active {
     background: color-mix(in srgb, var(--accent) 88%, black);
 }
 
@@ -228,7 +242,7 @@
     transition: background var(--ease), color var(--ease);
 }
 
-.copy:hover {
+.copy:active {
     background: var(--soft);
     color: var(--accent);
 }
@@ -290,29 +304,139 @@
     color: #8a1c1c;
 }
 
+/* INTERACTION ----------------------------------------------------------------------------------------------------------------------------------- */
+@media (hover: hover) {
+    .button:hover {
+        border-color: var(--accent);
+    }
+
+    .solid:hover {
+        background: color-mix(in srgb, var(--accent) 88%, black);
+    }
+
+    .copy:hover {
+        background: var(--soft);
+        color: var(--accent);
+    }
+}
+
+@media (pointer: coarse) {
+    .button {
+        min-height: 44px;
+    }
+
+    .copy {
+        width: 44px;
+        height: 44px;
+    }
+
+    .format {
+        padding-block: 6px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .preview,
+    .text,
+    .button,
+    .copy {
+        transition: none;
+    }
+}
+
 /* RESPONSIVENESS -------------------------------------------------------------------------------------------------------------------------------- */
-@media (max-width: 899px) {
+@container (max-width: 719px) {
     .grid {
         grid-template-columns: 1fr;
     }
 }
 
-@media (max-width: 699px) {
-    .page {
-        padding: var(--space-4);
-    }
-
+@container (max-width: 559px) {
     .card {
         padding: var(--space-4);
     }
-}
 
-@media (max-width: 479px) {
+    .preview {
+        min-height: 160px;
+        padding: var(--space-4);
+    }
+
+    .preview::before {
+        top: var(--space-3);
+        left: var(--space-4);
+    }
+
+    .previewHex {
+        font-size: 26px;
+    }
+
     .actions {
         flex-wrap: wrap;
     }
 
+    .button {
+        flex: 1 1 auto;
+    }
+
     .solid {
+        flex-basis: 100%;
         margin-left: 0;
+    }
+}
+
+@container (max-width: 439px) {
+    .format {
+        grid-template-columns: 1fr auto;
+        gap: var(--space-1) var(--space-3);
+    }
+
+    .format .formatLabel,
+    .formatValue {
+        grid-column: 1;
+    }
+
+    .copy {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+    }
+
+    .contrast {
+        grid-template-columns: 56px 1fr auto;
+        gap: var(--space-1) var(--space-3);
+        padding: var(--space-3);
+    }
+
+    .sample {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .contrast .formatLabel {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: end;
+        font-size: 14px;
+    }
+
+    .ratio {
+        grid-column: 2;
+        grid-row: 2;
+        align-self: start;
+        font-size: 14px;
+    }
+
+    .badge {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+        min-width: 60px;
+    }
+}
+
+@media (max-width: 699px) {
+    .page {
+        gap: var(--space-4);
+        padding: var(--space-4);
     }
 }

@@ -62,7 +62,7 @@ export default function ExportPanel({ data, filename = "hueforge-colors", format
                     <span>{count} {unit}</span>
                 </div>
 
-                <pre className = {styles.code}>
+                <pre className = {styles.code} tabIndex = {0} aria-label = {`${file} contents`}>
                     <code>
                         {text.split("\n").map((line, index) => (
                             <span key = {index} className = {styles.line}>{renderLine(line) || " "}</span>

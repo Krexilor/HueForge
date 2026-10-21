@@ -74,6 +74,9 @@ function HexField({ value, onChange }) {
             value = {draft ?? value}
             aria-label = "Stop color value"
             aria-invalid = {invalid}
+            autoCapitalize = "off"
+            autoCorrect = "off"
+            autoComplete = "off"
             spellCheck = "false"
             onChange = {event => handleText(event.target.value)}
             onBlur = {() => setDraft(null)}

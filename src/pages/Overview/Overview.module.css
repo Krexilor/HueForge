@@ -14,6 +14,21 @@
     color: var(--muted);
 }
 
+.primary,
+.secondary,
+.tool,
+.link {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.primary:focus-visible,
+.secondary:focus-visible,
+.tool:focus-visible,
+.link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
 /* HERO ------------------------------------------------------------------------------------------------------------------------------------------ */
 .hero {
     position: relative;
@@ -42,7 +57,7 @@
 
 .title {
     max-width: 14em;
-    font-size: clamp(32px, 5vw, 52px);
+    font-size: clamp(28px, 5.5vw, 52px);
     line-height: 1.08;
     letter-spacing: -0.02em;
     text-wrap: balance;
@@ -67,6 +82,7 @@
 .secondary {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: var(--space-2);
     min-height: 48px;
     padding: 0 var(--space-5);
@@ -86,12 +102,8 @@
     transition: transform var(--ease);
 }
 
-.primary:hover {
-    transform: translateY(-1px);
-}
-
-.primary:hover::after {
-    transform: translateX(3px);
+.primary:active {
+    transform: scale(0.98);
 }
 
 .secondary {
@@ -99,7 +111,7 @@
     border: 1px solid var(--line);
 }
 
-.secondary:hover {
+.secondary:active {
     border-color: var(--accent);
 }
 
@@ -115,10 +127,6 @@
     border-radius: var(--radius-md);
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
     transition: transform var(--ease);
-}
-
-.strip span:hover {
-    transform: translateY(-6px);
 }
 
 /* TOOLS ----------------------------------------------------------------------------------------------------------------------------------------- */
@@ -162,12 +170,6 @@
     transition: border-color var(--ease), transform var(--ease), box-shadow var(--ease);
 }
 
-.tool:hover {
-    border-color: var(--accent);
-    box-shadow: var(--shadow);
-    transform: translateY(-3px);
-}
-
 .tool::after {
     content: "→";
     position: absolute;
@@ -179,9 +181,8 @@
     transition: transform var(--ease), color var(--ease);
 }
 
-.tool:hover::after {
-    color: var(--accent);
-    transform: translateX(4px);
+.tool:active {
+    border-color: var(--accent);
 }
 
 .tool:last-child:nth-child(3n + 1) {
@@ -277,7 +278,7 @@
     transition: background var(--ease), border-color var(--ease);
 }
 
-.link:hover {
+.link:active {
     background: var(--soft);
     border-color: var(--accent);
 }
@@ -287,8 +288,65 @@
     height: 14px;
 }
 
+/* INTERACTION ----------------------------------------------------------------------------------------------------------------------------------- */
+@media (hover: hover) {
+    .primary:hover {
+        transform: translateY(-1px);
+    }
+
+    .primary:hover::after {
+        transform: translateX(3px);
+    }
+
+    .secondary:hover {
+        border-color: var(--accent);
+    }
+
+    .strip span:hover {
+        transform: translateY(-6px);
+    }
+
+    .tool:hover {
+        border-color: var(--accent);
+        box-shadow: var(--shadow);
+        transform: translateY(-3px);
+    }
+
+    .tool:hover::after {
+        color: var(--accent);
+        transform: translateX(4px);
+    }
+
+    .link:hover {
+        background: var(--soft);
+        border-color: var(--accent);
+    }
+}
+
+@media (pointer: coarse) {
+    .link {
+        min-height: 44px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .primary,
+    .primary::after,
+    .secondary,
+    .strip span,
+    .tool,
+    .tool::after,
+    .link {
+        transition: none;
+    }
+}
+
 /* RESPONSIVENESS -------------------------------------------------------------------------------------------------------------------------------- */
 @container (max-width: 719px) {
+    .hero {
+        padding: var(--space-6) var(--space-5);
+    }
+
     .tools {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -301,26 +359,69 @@
     .tool:last-child:nth-child(odd) {
         grid-column: 1 / -1;
     }
-}
 
-@container (max-width: 559px) {
     .about {
         grid-template-columns: 1fr;
     }
+}
 
-    .hero {
-        padding: var(--space-6) var(--space-5);
+@container (max-width: 559px) {
+    .text {
+        margin: var(--space-3) 0 var(--space-5);
+        font-size: 16px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .primary,
+    .secondary {
+        width: 100%;
     }
 
     .strip {
+        gap: 4px;
         height: 48px;
         margin-top: var(--space-6);
+    }
+
+    .strip span {
+        border-radius: 6px;
+    }
+
+    .card {
+        padding: var(--space-5);
     }
 }
 
 @container (max-width: 439px) {
+    .hero {
+        padding: var(--space-5) var(--space-4);
+    }
+
     .tools {
         grid-template-columns: 1fr;
+    }
+
+    .tool {
+        padding: var(--space-4);
+    }
+
+    .tool::after {
+        top: calc(var(--space-4) + 13px);
+        right: var(--space-4);
+    }
+
+    .top {
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: var(--space-3);
+        margin-bottom: 0;
+    }
+
+    .name {
+        padding-right: var(--space-6);
     }
 }
 

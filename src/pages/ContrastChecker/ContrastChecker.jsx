@@ -82,6 +82,9 @@ function ColorField({ label, value, onChange }) {
                     value = {draft ?? value}
                     aria-label = {`${label} value`}
                     aria-invalid = {invalid}
+                    autoCapitalize = "off"
+                    autoCorrect = "off"
+                    autoComplete = "off"
                     spellCheck = "false"
                     onChange = {event => handleText(event.target.value)}
                     onBlur = {() => setDraft(null)}
@@ -281,6 +284,7 @@ export default function ContrastChecker() {
                             <input
                                 className = {styles.custom}
                                 type = "number"
+                                inputMode = "decimal"
                                 min = {1}
                                 max = {21}
                                 step = {0.1}

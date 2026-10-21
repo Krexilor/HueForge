@@ -9,10 +9,10 @@ import ShareButton from "../../components/common/ShareButton/ShareButton.jsx"
 import ColorSwatchPicker from "../../components/common/ColorSwatchPicker/ColorSwatchPicker.jsx"
 
 // HELPERS -----------------------------------------------------------------------------------------------------------------------------------------|
-import { parseColor, isInGamut, randomColor, getFormats, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
+import useCopy from "../../hooks/useCopy.js"
 import { colorLink } from "../../lib/Color/Links.js"
 import useSharedColor from "../../hooks/useSharedColor.js"
-import useCopy from "../../hooks/useCopy.js"
+import { parseColor, isInGamut, randomColor, getFormats, getContrast, getRating, getReadable } from "../../lib/Color/Convert.js"
 
 // STYLES ------------------------------------------------------------------------------------------------------------------------------------------|
 import styles from "./ColorPicker.module.css"
@@ -101,6 +101,9 @@ export default function ColorPicker() {
                             value = {draft ?? hex}
                             aria-label = "Color value"
                             aria-invalid = {invalid}
+                            autoCapitalize = "off"
+                            autoCorrect = "off"
+                            autoComplete = "off"
                             spellCheck = "false"
                             onChange = {event => handleText(event.target.value)}
                             onBlur = {() => setDraft(null)}
