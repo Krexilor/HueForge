@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<urlset xmlns = "http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://hueforge.pages.dev/</loc>
+    </url>
+    <url>
+        <loc>https://hueforge.pages.dev/color-picker</loc>
+    </url>
+    <url>
+        <loc>https://hueforge.pages.dev/shade-finder</loc>
+    </url>
+    <url>
+        <loc>https://hueforge.pages.dev/harmony</loc>
+    </url>
+    <url>
+        <loc>https://hueforge.pages.dev/gradient-studio</loc>
+    </url>
+    <url>
+        <loc>https://hueforge.pages.dev/contrast-checker</loc>
+    </url>
+    <url>
+        <loc>https://hueforge.pages.dev/color-vision</loc>
+    </url>
+    <url>
+        <loc>https://hueforge.pages.dev/palette-playground</loc>
+    </url>
+</urlset>
